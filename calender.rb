@@ -1,11 +1,9 @@
-require_relative 'Event'
+require_relative 'event'
 
 class Calendar
   def initialize
     @hash = {}
   end
-
-  public
 
   def display_portal
     loop do
@@ -23,7 +21,7 @@ class Calendar
 
       break if @choice.eql? '7'
 
-      print "\n\t\t Wrong Input \n" if !((1..7).include? @choice.to_i)
+      print "\n\t\t Wrong Input \n" unless (1..7).include? @choice.to_i
 
       evaluate
     end
@@ -65,7 +63,7 @@ class Calendar
         print "\n\t\tEnter index to edit : "
         input = gets.chomp.to_i
 
-        if input > 0 && @hash[date].include?(@hash[date][input - 1])
+        if input.positive? && @hash[date].include?(@hash[date][input - 1])
 
           event = @hash[date][input - 1]
 
@@ -79,7 +77,8 @@ class Calendar
           print "\t\t Enter New event desc : "
           desc_of_event = gets.chomp
 
-          event.name, event.desc = name_of_event, desc_of_event
+          event.name = name_of_event
+          event.desc = desc_of_event
 
           puts "\n\t\t Event Updated Successfully......\n"
 
@@ -89,7 +88,7 @@ class Calendar
       else
         puts "\n\t\tNo Event for this date......\n"
       end
-    rescue
+    rescue Date::Error
       puts "\t\tInvalid Date"
     end
   end
@@ -115,7 +114,7 @@ class Calendar
         print "\n\t\tEnter index to remove : "
         input = gets.chomp.to_i
 
-        if input > 0 && @hash[date].include?(@hash[date][input - 1])
+        if input.positive? && @hash[date].include?(@hash[date][input - 1])
           @hash[date].delete_at(input - 1)
           puts "\n\t\tEvent Deleted Successfully......\n"
 
@@ -128,7 +127,7 @@ class Calendar
       else
         puts "\n\t\tNo Event for this date......\n"
       end
-    rescue
+    rescue Date::Error
       puts "\t\tInvalid Date"
     end
   end
@@ -141,7 +140,7 @@ class Calendar
     begin
       date = Date.new(input[0], input[1], input[2])
       date = date.to_s.to_sym
-      @hash[date] = [] unless (@hash.key? date)
+      @hash[date] = [] unless @hash.key? date
 
       print "\t\t Enter event name : "
       name_of_event = gets.chomp
@@ -154,7 +153,7 @@ class Calendar
       @hash[date] << event
 
       puts "\n\n\t\tEvent Added Successfully\n\n"
-    rescue
+    rescue Date::Error
       puts "\t\tInvalid Date"
     end
   end
@@ -178,14 +177,14 @@ class Calendar
       else
         puts "\n\t\tNo Event for this date......\n"
       end
-    rescue
+    rescue Date::Error
       puts "\t\tInvalid Date"
     end
   end
 
   def get_day(date)
     day = date.wday
-    day += 7 if day == 0
+    day += 7 if day.zero?
     day
   end
 
@@ -197,8 +196,8 @@ class Calendar
     print "\t\t Enter Year : "
     year = gets.to_i
 
-    if !(1..12).include?(month)
-      puts "\t\tInvalid Date"
+    unless (1..12).include?(month)
+      puts "\n\t\tInvalid Date"
       return
     end
 
@@ -207,7 +206,7 @@ class Calendar
     (1..31).each do |x|
       begin
         date = Date.new(year.to_i, month.to_i, x)
-      rescue
+      rescue Date::Error
         date = nil
       end
       all_month_dates << date.to_s.to_sym unless date.to_s.eql? ''
@@ -224,7 +223,7 @@ class Calendar
     (1...32).each do |x|
       begin
         Date.new(year, month, x)
-      rescue
+      rescue Date::Error
         next
       end
       if count == 7
@@ -249,7 +248,7 @@ class Calendar
     print "\t\t Enter Year : "
     year = gets.to_i
 
-    if !(1..12).include?(month)
+    unless (1..12).include?(month)
       puts "\t\tInvalid Date"
       return
     end
@@ -258,7 +257,7 @@ class Calendar
     (1..31).each do |x|
       begin
         date = Date.new(year.to_i, month.to_i, x)
-      rescue
+      rescue Date::Error
         date = nil
       end
       all_month_dates << date.to_s.to_sym unless date.to_s.eql? ''

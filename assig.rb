@@ -1,6 +1,6 @@
 require 'date'
 
-require_relative 'Calender'
+require_relative 'calender'
 
 c = Calendar.new
 c.display_portal

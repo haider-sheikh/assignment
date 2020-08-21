@@ -1,7 +1,8 @@
 class Event
   attr_accessor :name, :desc
   def initialize(name, desc)
-    @name, @desc = name, desc
+    @name = name
+    @desc = desc
   end
 
   def show
