@@ -8,8 +8,8 @@ describe Calender do
   end
 
   it 'Should raise Date::Error when called to add_new_event method' do
-    cal = Calender.new
-    expect { cal.add_new_event [2020,14,23]}.to raise_error(Date::Error)
+    cal = Calender.new.add_new_event [2020,14,23]
+    expect (cal).to be nil
   end
 
   # it 'Should raise Argument Error' do
