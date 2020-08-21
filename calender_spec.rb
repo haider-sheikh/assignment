@@ -11,8 +11,4 @@ describe Calender do
     cal = Calender.new.add_new_event [2020,14,23]
     expect (cal).to be nil
   end
-
-  # it 'Should raise Argument Error' do
-  #   expect { Event.new('Corona') }.to raise_error(ArgumentError)
-  # end
 end
