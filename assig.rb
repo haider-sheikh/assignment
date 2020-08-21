@@ -7,5 +7,4 @@ c.display_portal
 
 # date 0 check year
 # resue type
-#only one rescue code
-
+# only one rescue code
