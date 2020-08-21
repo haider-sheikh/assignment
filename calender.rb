@@ -1,6 +1,6 @@
 require_relative 'event'
 
-class Calendar
+class Calender
   def initialize
     @hash = {}
   end
@@ -27,8 +27,6 @@ class Calendar
     end
   end
 
-  protected
-
   def take_input
     print "\t\t Enter Month(1..12) : "
     month = gets.to_i
@@ -42,10 +40,8 @@ class Calendar
     [year, month, day]
   end
 
-  def edit_event
+  def edit_event input
     puts "\n\t\t****Edit Event****"
-
-    input = take_input
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -93,10 +89,8 @@ class Calendar
     end
   end
 
-  def remove_event
+  def remove_event input
     puts "\n\t\t****Remove Event****"
-
-    input = take_input
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -132,10 +126,8 @@ class Calendar
     end
   end
 
-  def add_new_event
+  def add_new_event input
     puts "\n\t\t****Add New Event****"
-
-    input = take_input
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -158,10 +150,8 @@ class Calendar
     end
   end
 
-  def view_specific_event
+  def view_specific_event input
     puts "\n\t\t****Specific Event****"
-
-    input = take_input
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -278,15 +268,15 @@ class Calendar
   def evaluate
     case @choice.to_i
     when 1
-      add_new_event
+      add_new_event take_input
     when 2
-      remove_event
+      remove_event take_input
     when 3
-      edit_event
+      edit_event take_input
     when 4
       print_month_view
     when 5
-      view_specific_event
+      view_specific_event take_input
     when 6
       view_specific_month_event
     end
