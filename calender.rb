@@ -1,6 +1,7 @@
 require_relative 'event'
 
 class Calender
+  attr_reader :hash
   def initialize
     @hash = {}
   end
@@ -41,8 +42,6 @@ class Calender
   end
 
   def edit_event input
-    puts "\n\t\t****Edit Event****"
-
     begin
       date = Date.new(input[0], input[1], input[2])
       date = date.to_s.to_sym
@@ -90,7 +89,6 @@ class Calender
   end
 
   def remove_event input
-    puts "\n\t\t****Remove Event****"
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -123,11 +121,11 @@ class Calender
       end
     rescue Date::Error
       puts "\t\tInvalid Date"
+      "\t\tInvalid Date" # returning value for unit test cases
     end
   end
 
-  def add_new_event input
-    puts "\n\t\t****Add New Event****"
+  def add_new_event input    
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -147,11 +145,11 @@ class Calender
       puts "\n\n\t\tEvent Added Successfully\n\n"
     rescue Date::Error
       puts "\t\tInvalid Date"
+      "\t\tInvalid Date" # returning value for unit test cases
     end
   end
 
   def view_specific_event input
-    puts "\n\t\t****Specific Event****"
 
     begin
       date = Date.new(input[0], input[1], input[2])
@@ -166,9 +164,11 @@ class Calender
         end
       else
         puts "\n\t\tNo Event for this date......\n"
+        "\n\t\tNo Event for this date......\n"# returning value for unit test cases
       end
     rescue Date::Error
       puts "\t\tInvalid Date"
+      "\t\tInvalid Date" # returning value for unit test cases
     end
   end
 
@@ -179,7 +179,7 @@ class Calender
   end
 
   def print_month_view
-    puts "\n\t\t****Specific Month Events (Month View Style) ****"
+    
     print "\t\t Enter Month(1..12) : "
     month = gets.to_i
 
@@ -231,7 +231,7 @@ class Calender
   end
 
   def view_specific_month_event
-    puts "\n\t\t****Specific Month Events****"
+
     print "\t\t Enter Month(1..12) : "
     month = gets.to_i
 
@@ -268,16 +268,22 @@ class Calender
   def evaluate
     case @choice.to_i
     when 1
+      puts "\n\t\t****Add New Event****"
       add_new_event take_input
     when 2
+      puts "\n\t\t****Remove Event****"
       remove_event take_input
     when 3
+      puts "\n\t\t****Edit Event****"
       edit_event take_input
     when 4
+      puts "\n\t\t****Specific Month Events (Month View Style) ****"
       print_month_view
     when 5
+      puts "\n\t\t****Specific Event****"
       view_specific_event take_input
     when 6
+      puts "\n\t\t****Specific Month Events****"
       view_specific_month_event
     end
   end

@@ -7,8 +7,19 @@ describe Calender do
     expect(day).to be 4
   end
 
-  it 'Should raise Date::Error when called to add_new_event method' do
-    cal = Calender.new.add_new_event [2020,14,23]
-    expect (cal).to be nil
+  it 'Should display Invalid Date when called to add_new_event method' do
+    expect(Calender.new.add_new_event [2020,14,23]).to eq "\t\tInvalid Date"
+  end
+
+  it 'Should display Invalid Date when called to remove_event method' do
+    expect(Calender.new.remove_event [2020,14,23]).to eq "\t\tInvalid Date"
+  end
+
+  it 'Should display Invalid Date when called to view_specific_event method' do
+    expect(Calender.new.view_specific_event [2020,14,23]).to eq "\t\tInvalid Date"
+  end
+
+  it 'Should display No Event to show when called to view_specific_event method' do
+    expect(Calender.new.view_specific_event [2020, 1, 23]).to eq "\n\t\tNo Event for this date......\n"
   end
 end
