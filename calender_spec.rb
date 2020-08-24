@@ -7,8 +7,12 @@ describe Calender do
     expect(day).to be 4
   end
 
-  it 'Should display Invalid Date when called to add_new_event method' do
-    expect(Calender.new.add_new_event [2020,14,23]).to eq "\t\tInvalid Date"
+  it 'Should display Invalid Date error' do
+    expect(Calender.new.add_new_event [2020,14,23,'Corona','Description of corona']).to eq "\t\tInvalid Date"
+  end
+
+  it 'Should add event successfully' do
+    expect(Calender.new.add_new_event [2020,11,23,'Corona','Description of corona']).to eq "\n\n\t\tEvent Added Successfully\n\n"
   end
 
   it 'Should display Invalid Date when called to remove_event method' do

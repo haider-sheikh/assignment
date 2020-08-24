@@ -126,27 +126,25 @@ class Calender
   end
 
   def add_new_event input    
-
     begin
-      date = Date.new(input[0], input[1], input[2])
-      date = date.to_s.to_sym
-      @hash[date] = [] unless @hash.key? date
+        date = Date.new(input[0], input[1], input[2])
+        date = date.to_s.to_sym
+        @hash[date] = [] unless @hash.key? date
 
-      print "\t\t Enter event name : "
-      name_of_event = gets.chomp
+        name_of_event = input[3]
 
-      print "\t\t Enter event desc : "
-      desc_of_event = gets.chomp
+        desc_of_event = input[4]
 
-      event = Event.new(name_of_event, desc_of_event)
+        event = Event.new(name_of_event, desc_of_event)
 
-      @hash[date] << event
+        @hash[date] << event
 
-      puts "\n\n\t\tEvent Added Successfully\n\n"
-    rescue Date::Error
-      puts "\t\tInvalid Date"
-      "\t\tInvalid Date" # returning value for unit test cases
-    end
+        puts "\n\n\t\tEvent Added Successfully\n\n"
+        "\n\n\t\tEvent Added Successfully\n\n"
+      rescue Date::Error
+        puts "\t\tInvalid Date"
+        "\t\tInvalid Date"
+      end
   end
 
   def view_specific_event input
@@ -269,7 +267,16 @@ class Calender
     case @choice.to_i
     when 1
       puts "\n\t\t****Add New Event****"
-      add_new_event take_input
+      input = take_input
+
+      print "\t\t Enter event name : "
+      name_of_event = gets.chomp
+
+      print "\t\t Enter event desc : "
+      desc_of_event = gets.chomp
+
+      input << name_of_event << desc_of_event
+      add_new_event input
     when 2
       puts "\n\t\t****Remove Event****"
       remove_event take_input
